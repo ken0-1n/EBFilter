@@ -162,10 +162,10 @@ def EBFilter_worker_anno(targetMutationFile, targetBamPath, controlBamPathList, 
 
         EB_score = "." # if the variant is complex, we ignore that
         if not var == "":
-            EB_score = get_eb_score.get_eb_score(var, F_target, F_control, base_qual_thres, controlFileNum)
+            results_line_data = get_eb_score.get_eb_score(var, F_target, F_control, base_qual_thres, controlFileNum)
 
         # add the score and write the vcf record
-        print('\t'.join(F + [str(EB_score)]), file=hOUT)
+        print('\t'.join(F + [results_line_data]), file=hOUT)
 
     hIN.close()
     hOUT.close()

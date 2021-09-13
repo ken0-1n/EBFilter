@@ -43,5 +43,23 @@ def get_eb_score(var, F_target, F_control, base_qual_thres, controlFileNum):
     else:
         EB_score = - round(math.log10(EB_pvalue), 3)
 
-    return EB_score
+    d_ctrl_p = sum(depthCounts_control_p)
+    v_ctrl_p = sum(varCounts_control_p)
+    d_ctrl_n = sum(depthCounts_control_n)
+    v_ctrl_n = sum(varCounts_control_n)
+    d_ctrl = d_ctrl_p + d_ctrl_n
+    v_ctrl = v_ctrl_p + v_ctrl_n
+    freq_ctrl = '{0:.3f}'.format(float(v_ctrl)/d_ctrl)
+    freq_ctrl_p = '{0:.3f}'.format(float(v_ctrl_p)/d_ctrl_p)
+    freq_ctrl_n = 0
+    if d_ctrl_n != 0:
+        freq_ctrl_n = '{0:.3f}'.format(float(v_ctrl_n)/d_ctrl_n)
+    d_ctrl_p_array = ",".join(map(str,depthCounts_control_p))
+    v_ctrl_p_array = ",".join(map(str,varCounts_control_p))
+    d_ctrl_n_array = ",".join(map(str,depthCounts_control_n))
+    v_ctrl_n_array = ",".join(map(str,varCounts_control_n))
+
+    result_str = str(d_ctrl)+"\t"+str(v_ctrl)+"\t"+str(d_ctrl_p)+"\t"+str(v_ctrl_p)+"\t"+str(d_ctrl_n)+"\t"+str(v_ctrl_n)+"\t"+str(fre    q_ctrl)+"\t"+str(freq_ctrl_p)+"\t"+str(freq_ctrl_n)+"\t"+d_ctrl_p_array+"\t"+v_ctrl_p_array+"\t"+d_ctrl_n_array+"\t"+v_ctrl_n_array
+
+    return result_str
 
